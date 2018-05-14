@@ -67,6 +67,7 @@ def balance_team(file_path, team_number, target_path):
 	criterion.compute_height_score()
 	criterion.compute_weight_score()
 	criterion.compute_years_playing_score()
+	criterion.compute_past_achievement_score()
 
 
 def todo():
@@ -76,22 +77,6 @@ def todo():
 	Criterion_Achievement = []
 	Criterion_Total = []
 
-	# print(i, Name[i], Criterion_Height[i])
-
-
-	# past achievements score computation
-	i = 0
-	for i in range(index):
-		# print(PlayingYears[i].upper())
-		if Achievement[i].upper() == str("None").upper():
-			Criterion_Achievement.append(40)
-		elif Achievement[i].upper() == str("Individual Awardee (ROY, Most Improved, etc.)").upper():
-			Criterion_Achievement.append(60)
-		elif Achievement[i].upper() == str("Mythical 5 member").upper():
-			Criterion_Achievement.append(80)
-		elif Achievement[i].upper() == str("MVP").upper():
-			Criterion_Achievement.append(100)
-	# print(i, Name[i], Achievement[i].upper(), Criterion_Achievement[i])
 
 	# total score computation
 	i = 0

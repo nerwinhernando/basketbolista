@@ -16,6 +16,7 @@ class Criterion(object):
         self.height_criterion = []
         self.weight_criterion = []
         self.playing_years_criterion = []
+        self.achievement_criterion = []
 
     def compute_height_score(self):
         # height score computation
@@ -70,6 +71,19 @@ class Criterion(object):
                 self.playing_years_criterion.append(80)
             elif p_playing_years.upper() == str("11 years above").upper():
                 self.playing_years_criterion.append(100)
+
+    def compute_past_achievement_score(self):
+        for player in self.player_list:
+            p_achievment = player.achievement
+
+            if p_achievment.upper() == str("None").upper():
+                self.achievement_criterion.append(40)
+            elif p_achievment.upper() == str("Individual Awardee (ROY, Most Improved, etc.)").upper():
+                self.achievement_criterion.append(60)
+            elif p_achievment.upper() == str("Mythical 5 member").upper():
+                self.achievement_criterion.append(80)
+            elif p_achievment.upper() == str("MVP").upper():
+                self.achievement_criterion.append(100)
 
     def display_height_score(self):
         print("Height Score Information")
