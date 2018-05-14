@@ -36,10 +36,11 @@ def get_destination_file_path():
 
 # open file from filepath
 
-def balance_team(file_path, team_number, target_path):
+def parse_liga_csv_file(file_path):
 	print("Getting Raw Data form CSV File")
 	
 	index = 0
+	player_list = []
 
 	with open(file_path, 'r') as csv_file:
 		csv_file = csv.reader(csv_file)
@@ -50,10 +51,18 @@ def balance_team(file_path, team_number, target_path):
 				contact_nos = str(line[4]), weight = int(line[5]), height = int(line[6]), position = str(line[7]), \
 				playing_years = str(line[8]), achievement = str(line[9]), thankyou_page = str(line[10]), thankyou_all = str(line[11]), \
 				ID = str(line[12]), created_date = str(line[13]) , updated_date = str(line[14]), owner = str(line[15]))
+			player_list.append(player_info)
 			index = index + 1
 
 	print("total Records: ", index)
-	no_players = index
+
+	return player_list
+
+def balance_team(file_path, team_number, target_path):
+
+	# read the liga csv file exported from the database
+	player_list = parse_liga_csv_file(file_path)
+
 
 def todo():
 	Criterion_Height = []
