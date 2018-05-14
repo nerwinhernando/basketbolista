@@ -10,11 +10,7 @@ class PlayerInfo(object):
     """
 
     def __init__(self, **kwargs):
-        """Return a Customer object whose name is *name* and starting
-        balance is *balance*."""
         self.name = kwargs['name']
-        #self.balance = kwargs['balance']
-
         self.title = kwargs['title']
         self.name = kwargs['name']
         self.age = kwargs['age']
@@ -32,9 +28,9 @@ class PlayerInfo(object):
         self.updated_date = kwargs['updated_date']
         self.owner = kwargs['owner']
 
-        display_info()
+        self.display_info(kwargs)
 
-    def display_info(self):
+    def display_info(self, kwargs):
         """Display information about the player """
         print("Player Information")
-        print("Name: ")
+        print(kwargs)

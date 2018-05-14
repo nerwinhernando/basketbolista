@@ -1,6 +1,7 @@
 import math
 import csv
 import os
+from player_info import PlayerInfo
 
 # get number of teams for balancing
 def get_number_of_teams():
@@ -36,53 +37,25 @@ def get_destination_file_path():
 # open file from filepath
 
 def balance_team(file_path, team_number, target_path):
-	Title = []
-	Name = []
-	Age = []
-	HomeAddress = []
-	ContactNos = []
-	Weight = []
-	Height = []
-	Position = []
-	PlayingYears = []
-	Achievement = []
-	ThankYouPage = []
-	ThankYouAll = []
-	ID = []
-	CreatedDate = []
-	UpdatedDate = []
-	Owner = []
-
 	print("Getting Raw Data form CSV File")
+	
 	index = 0
 
 	with open(file_path, 'r') as csv_file:
 		csv_file = csv.reader(csv_file)
-
 		next(csv_file)
 
 		for line in csv_file:
-			Title.append(str(line[0]))
-			Name.append(str(line[1]))
-			Age.append(int(line[2]))
-			HomeAddress.append(str(line[3]))
-			ContactNos.append(str(line[4]))
-			Weight.append(int(line[5]))
-			Height.append(int(line[6]))
-			Position.append(str(line[7]))
-			PlayingYears.append(str(line[8]))
-			Achievement.append(str(line[9]))
-			ThankYouPage.append(str(line[10]))
-			ThankYouAll.append(str(line[11]))
-			ID.append(str(line[12]))
-			CreatedDate.append(str(line[13]))
-			UpdatedDate.append(str(line[14]))
-			Owner.append(str(line[15]))
+			player_info = PlayerInfo(title=str(line[0]), name = str(line[1]), age = int(line[2]), home_address = str(line[3]), \
+				contact_nos = str(line[4]), weight = int(line[5]), height = int(line[6]), position = str(line[7]), \
+				playing_years = str(line[8]), achievement = str(line[9]), thankyou_page = str(line[10]), thankyou_all = str(line[11]), \
+				ID = str(line[12]), created_date = str(line[13]) , updated_date = str(line[14]), owner = str(line[15]))
 			index = index + 1
 
 	print("total Records: ", index)
 	no_players = index
 
+def todo():
 	Criterion_Height = []
 	Criterion_Weight = []
 	Criterion_PlayingYears = []
@@ -263,3 +236,5 @@ if __name__ == '__main__':
     no_of_teams = get_number_of_teams()
     source_file_path = locate_source_file_path()
     destination_file_path = get_destination_file_path()
+
+    balance_team(source_file_path, no_of_teams, destination_file_path)
