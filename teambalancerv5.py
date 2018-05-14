@@ -2,6 +2,7 @@ import math
 import csv
 import os
 from player_info import PlayerInfo
+from criterion import Criterion
 
 # get number of teams for balancing
 def get_number_of_teams():
@@ -62,6 +63,10 @@ def balance_team(file_path, team_number, target_path):
 
 	# read the liga csv file exported from the database
 	player_list = parse_liga_csv_file(file_path)
+
+	criterion = Criterion(player_list)
+
+
 
 
 def todo():
