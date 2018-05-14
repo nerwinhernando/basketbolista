@@ -28,6 +28,13 @@ class PlayerInfo(object):
         self.updated_date = kwargs['updated_date']
         self.owner = kwargs['owner']
 
+        # criterions
+        self.total_criterion = 0
+        self.height_criterion = 0
+        self.weight_criterion = 0
+        self.playing_years_criterion = 0
+        self.achievement_criterion = 0
+
         self.display_info(kwargs)
 
     def display_info(self, kwargs):

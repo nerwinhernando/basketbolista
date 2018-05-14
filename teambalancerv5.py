@@ -69,6 +69,8 @@ def balance_team(file_path, team_number, target_path):
 	criterion.compute_years_playing_score()
 	criterion.compute_past_achievement_score()
 
+	criterion.compute_total_score()	
+
 
 def todo():
 	Criterion_Height = []
@@ -76,13 +78,6 @@ def todo():
 	Criterion_PlayingYears = []
 	Criterion_Achievement = []
 	Criterion_Total = []
-
-
-	# total score computation
-	i = 0
-	for i in range(index):
-		Criterion_Total.append((0.30 * Criterion_Height[i]) + (0.20 * Criterion_Weight[i]) + (0.20 * Criterion_PlayingYears[i]) + (0.30 * Criterion_Achievement[i]))
-	# print(i, ID[i], Name[i], Position[i], Criterion_Total[i])
 
 	Position_Center = []
 	Position_Forward = []
