@@ -6,34 +6,35 @@ from criterion import Criterion
 
 # get number of teams for balancing
 def get_number_of_teams():
-	return 8
-	# print("Getting Team Numbers for Balancing")
+	print("Getting Team Numbers for Balancing")
 	# text_file = open('input_parameters/team_number.txt', 'r')
 	# team_number = text_file.readline().replace('\n', '')
-	# print("Teams for balancing is " + team_number)
+	team_number = 8
+	print("Teams for balancing is " + team_number)
 	# text_file.close()
-
-	# print()
+	return team_number
 
 # locate source file path
 def locate_source_file_path():
-	return "./data/LigaDatabase.csv"
-	# print("Getting Filepath")
+	print("Getting Filepath")
 	# text_file = open('input_parameters/file_path.txt', 'r')
 	# file_path = text_file.readline().replace('\n', '')
-	# print("File path is " + file_path)
+	file_path = "./data/LigaDatabase.csv"
+	print("File path is " + file_path)
 	# text_file.close()
+	return file_path
 
 	# print()
 
 # get destination file path
 def get_destination_file_path():
-	return "data\GroupingsFinal.csv"
-	# print("Getting Target Destination of Results")
+	print("Getting Target Destination of Results")	
 	# text_file = open('input_parameters/target_path.txt', 'r')
 	# target_path = text_file.readline().replace('\n', '')
-	# print("Target path is " + target_path)
+	target_path = "data\GroupingsFinal.csv"
+	print("Target path is " + target_path)
 	# text_file.close()
+	return target_path
 
 # open file from filepath
 def parse_liga_csv_file(file_path):
