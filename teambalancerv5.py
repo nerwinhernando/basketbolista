@@ -4,6 +4,7 @@ import os
 from player_info import PlayerInfo
 from criterion import Criterion
 
+
 def get_number_of_teams():
 	print("Getting Team Numbers for Balancing")
 	# text_file = open('input_parameters/team_number.txt', 'r')
@@ -12,6 +13,7 @@ def get_number_of_teams():
 	print("Teams for balancing is " + str(team_number))
 	# text_file.close()
 	return team_number
+
 
 def locate_source_file_path():
 	print("Getting Filepath")
@@ -22,6 +24,7 @@ def locate_source_file_path():
 	# text_file.close()
 	return file_path
 
+
 def get_destination_file_path():
 	print("Getting Target Destination of Results")	
 	# text_file = open('input_parameters/target_path.txt', 'r')
@@ -30,6 +33,7 @@ def get_destination_file_path():
 	print("Target path is " + target_path)
 	# text_file.close()
 	return target_path
+
 
 def parse_liga_csv_file(file_path):
 	print("Getting Raw Data form CSV File")
@@ -52,23 +56,6 @@ def parse_liga_csv_file(file_path):
 	print("total Records: ", index)
 	return player_list
 
-def balance_team(file_path, team_number, target_path):
-	# read the liga csv file exported from the database
-	player_list = parse_liga_csv_file(file_path)
-
-	criterion = Criterion(player_list)
-	criterion.compute_height_score()
-	criterion.compute_weight_score()
-	criterion.compute_years_playing_score()
-	criterion.compute_past_achievement_score()
-
-	criterion.compute_total_score()
-
-	Position_Center, Position_Forward, Position_Guard = group_positions(player_list)
-
-	Ranked_Guard = sorted(Position_Guard, key=lambda x: x[3], reverse=False)
-	Ranked_Forward = sorted(Position_Forward, key=lambda x: x[3], reverse=False)
-	Ranked_Center = sorted(Position_Center, key=lambda x: x[3], reverse=False)
 
 def group_positions(player_list):	
 	Position_Center = []
@@ -88,14 +75,13 @@ def group_positions(player_list):
 
 	return Position_Center, Position_Forward, Position_Guard
 
-def todo():
+
+def rank(no_players, Ranked_Center, Ranked_Forward, Ranked_Guard):
 	Ranked_Masterlist = []
-
 	# rank descending by position
-
-	# print("Guard", len(Ranked_Guard), Ranked_Guard)
-	# print("Forward", len(Ranked_Forward), Ranked_Forward)
-	# print("Center", len(Ranked_Center), Ranked_Center)
+	print("Guard", len(Ranked_Guard), Ranked_Guard)
+	print("Forward", len(Ranked_Forward), Ranked_Forward)
+	print("Center", len(Ranked_Center), Ranked_Center)
 	print()
 	print()
 
@@ -109,9 +95,31 @@ def todo():
 		if(len(Ranked_Guard) > 0):
 			Ranked_Masterlist.append(Ranked_Guard.pop())
 		# print(i, len(Ranked_Masterlist), Ranked_Masterlist)
-
 	Ranked_Masterlist.reverse() # reverse the list to pop from last record
 
+
+def balance_team(file_path, team_number, target_path):
+	# read the liga csv file exported from the database
+	player_list = parse_liga_csv_file(file_path)
+
+	criterion = Criterion(player_list)
+	criterion.compute_height_score()
+	criterion.compute_weight_score()
+	criterion.compute_years_playing_score()
+	criterion.compute_past_achievement_score()
+
+	criterion.compute_total_score()
+
+	Position_Center, Position_Forward, Position_Guard = group_positions(player_list)
+
+	ranked_guard = sorted(Position_Guard, key=lambda x: x[3], reverse=False)
+	ranked_forward = sorted(Position_Forward, key=lambda x: x[3], reverse=False)
+	ranked_center = sorted(Position_Center, key=lambda x: x[3], reverse=False)
+
+	rank(len(player_list), ranked_center, ranked_forward, ranked_guard)
+
+
+def seed_players():
 	#seeding of players to teams
 	batches = math.ceil(int(no_players)/int(team_number))
 	if batches % 2 != 0:
