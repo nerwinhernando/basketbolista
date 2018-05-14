@@ -73,10 +73,6 @@ def balance_team(file_path, team_number, target_path):
 
 
 def todo():
-	Criterion_Height = []
-	Criterion_Weight = []
-	Criterion_PlayingYears = []
-	Criterion_Achievement = []
 	Criterion_Total = []
 
 	Position_Center = []
