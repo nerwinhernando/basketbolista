@@ -15,6 +15,7 @@ class Criterion(object):
         self.player_list = player_list
         self.height_criterion = []
         self.weight_criterion = []
+        self.playing_years_criterion = []
 
     def compute_height_score(self):
         # height score computation
@@ -56,6 +57,19 @@ class Criterion(object):
                 self.weight_criterion.append(60)
             elif (p_weight/((p_height/100)*(p_height/100))) >= 40:  # bmi - extremely obese
                 self.weight_criterion.append(40)
+
+    def compute_years_playing_score(self):
+        for player in self.player_list:
+            p_playing_years = player.playing_years
+
+            if p_playing_years.upper() == str("1-2 years").upper():
+                self.playing_years_criterion.append(40)
+            elif p_playing_years.upper() == str("3-5years").upper():
+                self.playing_years_criterion.append(60)
+            elif p_playing_years.upper() == str("6-10 years").upper():
+                self.playing_years_criterion.append(80)
+            elif p_playing_years.upper() == str("11 years above").upper():
+                self.playing_years_criterion.append(100)
 
     def display_height_score(self):
         print("Height Score Information")

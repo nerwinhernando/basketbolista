@@ -66,6 +66,7 @@ def balance_team(file_path, team_number, target_path):
 	criterion = Criterion(player_list)
 	criterion.compute_height_score()
 	criterion.compute_weight_score()
+	criterion.compute_years_playing_score()
 
 
 def todo():
@@ -77,19 +78,6 @@ def todo():
 
 	# print(i, Name[i], Criterion_Height[i])
 
-	# years playing score computation
-	i = 0
-	for i in range(index):
-		# print(PlayingYears[i].upper())
-		if PlayingYears[i].upper() == str("1-2 years").upper():
-			Criterion_PlayingYears.append(40)
-		elif PlayingYears[i].upper() == str("3-5years").upper():
-			Criterion_PlayingYears.append(60)
-		elif PlayingYears[i].upper() == str("6-10 years").upper():
-			Criterion_PlayingYears.append(80)
-		elif PlayingYears[i].upper() == str("11 years above").upper():
-			Criterion_PlayingYears.append(100)
-	# print(i, Name[i], PlayingYears[i].upper(), Criterion_PlayingYears[i])
 
 	# past achievements score computation
 	i = 0
