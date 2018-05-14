@@ -4,17 +4,15 @@ import os
 from player_info import PlayerInfo
 from criterion import Criterion
 
-# get number of teams for balancing
 def get_number_of_teams():
 	print("Getting Team Numbers for Balancing")
 	# text_file = open('input_parameters/team_number.txt', 'r')
 	# team_number = text_file.readline().replace('\n', '')
 	team_number = 8
-	print("Teams for balancing is " + team_number)
+	print("Teams for balancing is " + str(team_number))
 	# text_file.close()
 	return team_number
 
-# locate source file path
 def locate_source_file_path():
 	print("Getting Filepath")
 	# text_file = open('input_parameters/file_path.txt', 'r')
@@ -24,9 +22,6 @@ def locate_source_file_path():
 	# text_file.close()
 	return file_path
 
-	# print()
-
-# get destination file path
 def get_destination_file_path():
 	print("Getting Target Destination of Results")	
 	# text_file = open('input_parameters/target_path.txt', 'r')
@@ -36,7 +31,6 @@ def get_destination_file_path():
 	# text_file.close()
 	return target_path
 
-# open file from filepath
 def parse_liga_csv_file(file_path):
 	print("Getting Raw Data form CSV File")
 	
@@ -56,9 +50,7 @@ def parse_liga_csv_file(file_path):
 			index = index + 1
 
 	print("total Records: ", index)
-
 	return player_list
-
 
 def balance_team(file_path, team_number, target_path):
 	# read the liga csv file exported from the database
@@ -70,36 +62,36 @@ def balance_team(file_path, team_number, target_path):
 	criterion.compute_years_playing_score()
 	criterion.compute_past_achievement_score()
 
-	criterion.compute_total_score()	
+	criterion.compute_total_score()
 
+	Position_Center, Position_Forward, Position_Guard = group_positions(player_list)
 
-def todo():
-	Criterion_Total = []
+	Ranked_Guard = sorted(Position_Guard, key=lambda x: x[3], reverse=False)
+	Ranked_Forward = sorted(Position_Forward, key=lambda x: x[3], reverse=False)
+	Ranked_Center = sorted(Position_Center, key=lambda x: x[3], reverse=False)
 
+def group_positions(player_list):	
 	Position_Center = []
 	Position_Forward = []
 	Position_Guard = []
 
 	# group by position
-	i = 0
-	for i in range(index):
-		if Position[i].upper() == str("Guard").upper():
-			Position_Guard.append([ID[i], Name[i].upper(), Position[i].upper(), Criterion_Total[i]])
-		elif Position[i].upper() == str("Forward").upper():
-			Position_Forward.append([ID[i], Name[i].upper(), Position[i].upper(), Criterion_Total[i]])
-		elif Position[i].upper() == str("Center").upper():
-			Position_Center.append([ID[i], Name[i].upper(), Position[i].upper(), Criterion_Total[i]])
-	# print(ID[i], Name[i], Position[i], Criterion_Total[i])
+	for player in player_list:
+		position = player.position.upper()
+		if position == str("Guard").upper():
+			Position_Guard.append([player.id, player.name.upper(), position, player.total_criterion])
+		elif position == str("Forward").upper():
+			Position_Forward.append([player.id, player.name.upper(), position, player.total_criterion])
+		elif position == str("Center").upper():
+			Position_Center.append([player.id, player.name.upper(), position, player.total_criterion])
+		# print(ID[i], Name[i], Position[i], Criterion_Total[i])
 
-	# rank descending by position
-	Ranked_Center = []
-	Ranked_Forward = []
-	Ranked_Guard = []
+	return Position_Center, Position_Forward, Position_Guard
+
+def todo():
 	Ranked_Masterlist = []
 
-	Ranked_Guard = sorted(Position_Guard, key=lambda x: x[3], reverse=False)
-	Ranked_Forward = sorted(Position_Forward, key=lambda x: x[3], reverse=False)
-	Ranked_Center = sorted(Position_Center, key=lambda x: x[3], reverse=False)
+	# rank descending by position
 
 	# print("Guard", len(Ranked_Guard), Ranked_Guard)
 	# print("Forward", len(Ranked_Forward), Ranked_Forward)
