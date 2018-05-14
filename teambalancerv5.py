@@ -36,7 +36,6 @@ def get_destination_file_path():
 	# text_file.close()
 
 # open file from filepath
-
 def parse_liga_csv_file(file_path):
 	print("Getting Raw Data form CSV File")
 	
@@ -59,14 +58,14 @@ def parse_liga_csv_file(file_path):
 
 	return player_list
 
-def balance_team(file_path, team_number, target_path):
 
+def balance_team(file_path, team_number, target_path):
 	# read the liga csv file exported from the database
 	player_list = parse_liga_csv_file(file_path)
 
 	criterion = Criterion(player_list)
 	criterion.compute_height_score()
-
+	criterion.compute_weight_score()
 
 
 def todo():
@@ -77,24 +76,6 @@ def todo():
 	Criterion_Total = []
 
 	# print(i, Name[i], Criterion_Height[i])
-
-
-	# weight score computation using BMI and equivalences
-	i = 0
-	for i in range(index):
-		if (Weight[i]/((Height[i]/100)*(Height[i]/100))) <= 18:  # bmi - extremely underweight
-			Criterion_Weight.append(40)
-		elif (19 <= (Weight[i]/((Height[i]/100)*(Height[i]/100)))) and (Weight[i]/((Height[i]/100)*(Height[i]/100)) <= 24):  # bmi - underweight
-			Criterion_Weight.append(60)
-		elif (25 <= (Weight[i]/((Height[i]/100)*(Height[i]/100)))) and (Weight[i]/((Height[i]/100)*(Height[i]/100)) <= 29):  # bmi - healthy
-			Criterion_Weight.append(100)
-		elif (30 <= (Weight[i]/((Height[i]/100)*(Height[i]/100)))) and (Weight[i]/((Height[i]/100)*(Height[i]/100)) <= 34):  # bmi - overweight
-			Criterion_Weight.append(80)
-		elif (35 <= (Weight[i]/((Height[i]/100)*(Height[i]/100)))) and (Weight[i]/((Height[i]/100)*(Height[i]/100)) <= 39):  # bmi - obese
-			Criterion_Weight.append(60)
-		elif (Weight[i]/((Height[i]/100)*(Height[i]/100))) >= 40:  # bmi - extremely obese
-			Criterion_Weight.append(40)
-	# print(i, Name[i], Criterion_Weight[i])
 
 	# years playing score computation
 	i = 0
