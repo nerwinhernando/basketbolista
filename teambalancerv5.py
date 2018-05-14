@@ -65,7 +65,7 @@ def balance_team(file_path, team_number, target_path):
 	player_list = parse_liga_csv_file(file_path)
 
 	criterion = Criterion(player_list)
-
+	criterion.compute_height_score()
 
 
 
@@ -76,25 +76,6 @@ def todo():
 	Criterion_Achievement = []
 	Criterion_Total = []
 
-	# height score computation
-	i = 0
-	for i in range(index):
-		if Height[i] <= 148:
-			Criterion_Height.append(30)
-		elif 149 <= Height[i] <= 157:
-			Criterion_Height.append(40)
-		elif 158 <= Height[i] <= 166:
-			Criterion_Height.append(50)
-		elif 167 <= Height[i] <= 175:
-			Criterion_Height.append(60)
-		elif 176 <= Height[i] <= 185:
-			Criterion_Height.append(70)
-		elif 186 <= Height[i] <= 194:
-			Criterion_Height.append(80)
-		elif 195 <= Height[i] <= 202:
-			Criterion_Height.append(90)
-		elif Height[i] >= 203:
-			Criterion_Height.append(100)
 	# print(i, Name[i], Criterion_Height[i])
 
 
