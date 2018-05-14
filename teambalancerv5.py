@@ -101,7 +101,7 @@ def rank(no_players, Ranked_Center, Ranked_Forward, Ranked_Guard):
 
 
 #seeding of players to teams
-def seed_players(no_players, team_number, Ranked_Masterlist):
+def seed_players(no_players, team_number, target_path, Ranked_Masterlist):
 	Team_Composition = []
 
 	batches = math.ceil(int(no_players)/int(team_number))
@@ -173,9 +173,9 @@ def balance_team(file_path, no_of_teams, target_path):
 	ranked_forward = sorted(Position_Forward, key=lambda x: x[3], reverse=False)
 	ranked_center = sorted(Position_Center, key=lambda x: x[3], reverse=False)
 
-	rank(len(player_list), ranked_center, ranked_forward, ranked_guard)
+	master_list = rank(len(player_list), ranked_center, ranked_forward, ranked_guard)
 
-	#seed_players(len(player_list), no_of_teams, target_path)
+	seed_players(len(player_list), no_of_teams, target_path, master_list)
 
 
 if __name__ == '__main__':
