@@ -95,38 +95,19 @@ def rank(no_players, Ranked_Center, Ranked_Forward, Ranked_Guard):
 		if(len(Ranked_Guard) > 0):
 			Ranked_Masterlist.append(Ranked_Guard.pop())
 		# print(i, len(Ranked_Masterlist), Ranked_Masterlist)
-	Ranked_Masterlist.reverse() # reverse the list to pop from last record
+		Ranked_Masterlist.reverse() # reverse the list to pop from last record
+
+	return Ranked_Masterlist
 
 
-def balance_team(file_path, team_number, target_path):
-	# read the liga csv file exported from the database
-	player_list = parse_liga_csv_file(file_path)
+#seeding of players to teams
+def seed_players(no_players, team_number, Ranked_Masterlist):
+	Team_Composition = []
 
-	criterion = Criterion(player_list)
-	criterion.compute_height_score()
-	criterion.compute_weight_score()
-	criterion.compute_years_playing_score()
-	criterion.compute_past_achievement_score()
-
-	criterion.compute_total_score()
-
-	Position_Center, Position_Forward, Position_Guard = group_positions(player_list)
-
-	ranked_guard = sorted(Position_Guard, key=lambda x: x[3], reverse=False)
-	ranked_forward = sorted(Position_Forward, key=lambda x: x[3], reverse=False)
-	ranked_center = sorted(Position_Center, key=lambda x: x[3], reverse=False)
-
-	rank(len(player_list), ranked_center, ranked_forward, ranked_guard)
-
-
-def seed_players():
-	#seeding of players to teams
 	batches = math.ceil(int(no_players)/int(team_number))
 	if batches % 2 != 0:
 		batches = batches + 1
-
-	Team_Composition = []
-
+	
 	i = 0
 	for i in range(batches):
 		x = 0
@@ -173,9 +154,34 @@ def seed_players():
 					wr.writerow(csvRow)
 				del Team_Composition[x][0]
 
+
+def balance_team(file_path, no_of_teams, target_path):
+	# read the liga csv file exported from the database
+	player_list = parse_liga_csv_file(file_path)
+
+	criterion = Criterion(player_list)
+	criterion.compute_height_score()
+	criterion.compute_weight_score()
+	criterion.compute_years_playing_score()
+	criterion.compute_past_achievement_score()
+
+	criterion.compute_total_score()
+
+	Position_Center, Position_Forward, Position_Guard = group_positions(player_list)
+
+	ranked_guard = sorted(Position_Guard, key=lambda x: x[3], reverse=False)
+	ranked_forward = sorted(Position_Forward, key=lambda x: x[3], reverse=False)
+	ranked_center = sorted(Position_Center, key=lambda x: x[3], reverse=False)
+
+	rank(len(player_list), ranked_center, ranked_forward, ranked_guard)
+
+	#seed_players(len(player_list), no_of_teams, target_path)
+
+
 if __name__ == '__main__':
     no_of_teams = get_number_of_teams()
     source_file_path = locate_source_file_path()
     destination_file_path = get_destination_file_path()
 
     balance_team(source_file_path, no_of_teams, destination_file_path)
+
